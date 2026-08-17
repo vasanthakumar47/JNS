@@ -481,3 +481,121 @@ footer {
         padding: 25px 4%;
     }
 }
+/* ================= ABOUT JNS TECH RESPONSIVE CARD ================= */
+.about-card {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    padding: 35px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 30px;
+    align-items: center;
+    width: 100%;
+}
+
+.about-tag {
+    color: var(--primary);
+    font-weight: 800;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: inline-block;
+}
+
+.about-title {
+    color: var(--navy-dark);
+    font-size: clamp(1.4rem, 3.5vw, 2rem);
+    font-weight: 800;
+    margin: 8px 0 15px;
+    line-height: 1.25;
+}
+
+.about-desc {
+    color: #475569;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.about-badges {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.about-badge-item {
+    background: #f8fafc;
+    padding: 12px 18px;
+    border-radius: 6px;
+    flex: 1 1 160px;
+}
+
+.about-badge-item strong {
+    color: var(--navy-dark);
+    display: block;
+    font-size: 0.95rem;
+}
+
+.about-badge-item small {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.badge-orange {
+    border-left: 4px solid var(--primary);
+}
+
+.badge-blue {
+    border-left: 4px solid var(--navy-blue);
+}
+
+.about-img-box {
+    text-align: center;
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px dashed #cbd5e1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.about-img {
+    max-width: 100%;
+    height: auto;
+    max-height: 280px;
+    object-fit: contain;
+    border-radius: 8px;
+    display: block;
+}
+
+/* ================= 📱 MOBILE SPECIFIC STYLING ================= */
+@media screen and (max-width: 768px) {
+    .about-card {
+        grid-template-columns: 1fr; /* Single column layout for mobile */
+        padding: 20px 16px;         /* Compact padding for smaller screens */
+        gap: 20px;
+    }
+
+    .about-badges {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .about-badge-item {
+        width: 100%;
+        flex: none;
+    }
+
+    .about-img-box {
+        padding: 10px;
+    }
+
+    .about-img {
+        max-height: 220px;
+    }
+}
