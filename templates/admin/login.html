@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JNS TECH Admin Authentication</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', sans-serif; }
+        body { background:#0b192c; display:flex; justify-content:center; align-items:center; height:100vh; }
+        .login-card { background:#fff; width:100%; max-width:400px; padding:35px 30px; border-radius:10px; box-shadow:0 15px 35px rgba(0,0,0,0.3); text-align:center; }
+        .logo-box { background:#0b192c; color:#fff; width:65px; height:65px; line-height:65px; border-radius:50%; margin:0 auto 15px; font-size:1.8rem; border:3px solid #ff6500; }
+        h3 { color:#0b192c; font-weight:800; margin-bottom:5px; }
+        p { color:#64748b; font-size:0.88rem; margin-bottom:25px; }
+        .form-group { margin-bottom:20px; text-align:left; }
+        .form-group label { display:block; font-size:0.85rem; font-weight:700; color:#1e293b; margin-bottom:8px; }
+        .form-group input { width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:6px; font-size:1rem; outline:none; }
+        .form-group input:focus { border-color:#ff6500; box-shadow:0 0 5px rgba(255,101,0,0.3); }
+        .btn-login { width:100%; padding:12px; background:#ff6500; color:#fff; font-weight:700; font-size:1rem; border:none; border-radius:6px; cursor:pointer; transition:0.3s; }
+        .btn-login:hover { background:#e05800; }
+        .error-msg { background:#fee2e2; color:#b91c1c; padding:10px; border-radius:6px; font-size:0.85rem; margin-bottom:15px; }
+        .back-home { display:inline-block; margin-top:20px; color:#64748b; font-size:0.85rem; text-decoration:none; }
+        .back-home:hover { color:#ff6500; }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <div class="logo-box"><i class="bi bi-shield-lock-fill"></i></div>
+        <h3>Admin Access</h3>
+        <p>Enter Master Password to access JNS Tech Control Panel</p>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="error-msg"><i class="bi bi-exclamation-triangle-fill"></i> {{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form action="/admin/login" method="POST">
+            <div class="form-group">
+                <label>Master Password</label>
+                <input type="password" name="password" placeholder="Enter password" required autofocus>
+            </div>
+            <button type="submit" class="btn-login"><i class="bi bi-unlock-fill"></i> Authenticate & Enter</button>
+        </form>
+        <a href="/" class="back-home"><i class="bi bi-arrow-left"></i> Back to Homepage</a>
+    </div>
+
+</body>
+</html>

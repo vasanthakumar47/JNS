@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}JNS TECH | Garments Automation Machinery & Spares{% endblock %}</title>
+    
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- Top Contact Bar -->
+    <div class="top-bar">
+        <div class="top-info">
+            <span><i class="bi bi-envelope-fill text-warning"></i> <a href="mailto:jnstech.md@gmail.com">jnstech.md@gmail.com</a></span>
+            <span><i class="bi bi-telephone-outbound-fill text-warning"></i> +91 7708309077 / +91 7708199077</span>
+        </div>
+        <div>
+            <span><i class="bi bi-geo-alt-fill text-warning"></i> Hosur, Tamil Nadu | GST: 33CFSPV3857F1ZU</span>
+        </div>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <nav class="navbar">
+        <a href="/" class="logo-wrap">
+            <div class="logo-badge">JNS</div>
+            <div class="logo-title">
+                <h1>JNS TECH</h1>
+                <span>Garments Automation Sales & Service</span>
+            </div>
+        </a>
+
+        <div class="menu-toggle" id="mobile-menu"><i class="bi bi-list"></i></div>
+
+        <ul class="nav-links" id="nav-links">
+            <li><a href="/"><i class="bi bi-house-door"></i> Home</a></li>
+            <li><a href="/#about"><i class="bi bi-info-circle"></i> About Us</a></li>
+            <li><a href="/products"><i class="bi bi-grid"></i> Spares & Parts</a></li>
+            <li><a href="/#enquiry"><i class="bi bi-chat-left-dots"></i> Service Enquiry</a></li>
+            <li><a href="#contact"><i class="bi bi-pin-map"></i> Contact</a></li>
+            <li><a href="/#enquiry" class="btn-cta"><i class="bi bi-lightning-charge-fill"></i> Get Quick Quote</a></li>
+        </ul>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h5><i class="bi bi-building"></i> JNS TECH</h5>
+                <p>Preferred lifetime distributor for garments machineries, precision cutter spares, and industrial apparel manufacturing equipment with fast technical service support.</p>
+            </div>
+            <div class="footer-col">
+                <h5><i class="bi bi-gear-wide-connected"></i> Spares Catalog</h5>
+                <ul>
+                    <li><a href="/products"><i class="bi bi-chevron-right"></i> Cutter Maintenance Kits</a></li>
+                    <li><a href="/products"><i class="bi bi-chevron-right"></i> High-Density Bristle Blocks</a></li>
+                    <li><a href="/products"><i class="bi bi-chevron-right"></i> Grinding Stones & Sharpening Belts</a></li>
+                    <li><a href="/products"><i class="bi bi-chevron-right"></i> Precision Cutting Blades</a></li>
+                    <li><a href="/products"><i class="bi bi-chevron-right"></i> Spreader PCBs & Logic Boards</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5><i class="bi bi-geo-alt"></i> Registered Office</h5>
+                <p><strong>JNS TECH</strong></p>
+                <p>D NO 187/61, Plot No-15 Meenakshi Nagar,</p>
+                <p>Income Office Backside, Maruthi Nagar,</p>
+                <p>Hosur, Krishnagiri, Tamil Nadu - 635109</p>
+                <p style="margin-top: 8px;"><i class="bi bi-patch-check-fill text-warning"></i> GST: 33CFSPV3857F1ZU</p>
+            </div>
+            <div class="footer-col">
+                <h5><i class="bi bi-headset"></i> Immediate Assistance</h5>
+                <p><i class="bi bi-telephone-fill"></i> +91 7708309077</p>
+                <p><i class="bi bi-telephone-fill"></i> +91 7708199077</p>
+                <p><i class="bi bi-envelope-at-fill"></i> jnstech.md@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright &copy; 2026 JNS TECH. All Rights Reserved. Garments Automation Machinery Sales & Service.</p>
+        </div>
+    </footer>
+
+    <script>
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

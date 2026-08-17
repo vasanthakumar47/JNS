@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="hero">
+    <div class="hero-box">
+        <div class="hero-badge">
+            <i class="bi bi-shield-check"></i> Certified Industrial Machinery & Spares
+        </div>
+        <h2>High-Performance Garments Automation & Machinery Spares</h2>
+        <p>Your lifetime preferred distributor for automated cutter maintenance kits, high-density bristle blocks, cutter blades, spreader PCB boards, and on-time industrial service support.</p>
+        <div class="hero-btn-group">
+            <a href="/products" class="btn-main"><i class="bi bi-grid-fill"></i> View Spares Catalog</a>
+            <a href="#enquiry" class="btn-outline"><i class="bi bi-telephone-fill"></i> Book Service Support</a>
+        </div>
+    </div>
+</div>
+
+<!-- Trust & Highlights Bar -->
+<div class="trust-bar">
+    <div class="trust-item">
+        <i class="bi bi-cpu-fill"></i>
+        <div>
+            <h4>OEM Replacement Spares</h4>
+            <p>Original grade parts & cutter kits</p>
+        </div>
+    </div>
+    <div class="trust-item">
+        <i class="bi bi-tools"></i>
+        <div>
+            <h4>On-Time Service Support</h4>
+            <p>Dedicated technician repair backup</p>
+        </div>
+    </div>
+    <div class="trust-item">
+        <i class="bi bi-truck"></i>
+        <div>
+            <h4>Fast Dispatch</h4>
+            <p>Direct supply from Hosur, TN</p>
+        </div>
+    </div>
+    <div class="trust-item">
+        <i class="bi bi-patch-check-fill"></i>
+        <div>
+            <h4>GST Compliant</h4>
+            <p>GST: 33CFSPV3857F1ZU</p>
+        </div>
+    </div>
+</div>
+
+<!-- About Section with Clean Poster Layout -->
+<div class="container" id="about" style="padding-bottom: 20px;">
+    <div style="background: #ffffff; border-radius: 12px; border: 1px solid #e2e8f0; padding: 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; align-items: center;">
+        <div>
+            <span style="color: #ff6500; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">About JNS TECH</span>
+            <h3 style="color: #0b192c; font-size: 2rem; font-weight: 800; margin: 8px 0 15px;">Your Trusted Lifetime Machinery Partner</h3>
+            <p style="color: #475569; font-size: 1rem; line-height: 1.8; margin-bottom: 20px;">
+                <strong>JNS Tech</strong> is a preferred lifetime distributor for garments machineries and spare parts. We provide high-performance equipment spares, factory workstations, and on-time service support for apparel manufacturers across India.
+            </p>
+            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <div style="background: #f8fafc; padding: 12px 18px; border-radius: 6px; border-left: 4px solid #ff6500;">
+                    <strong style="color: #0b192c; display: block;">Sales & Services</strong>
+                    <small style="color: #64748b;">Complete Garment Automation</small>
+                </div>
+                <div style="background: #f8fafc; padding: 12px 18px; border-radius: 6px; border-left: 4px solid #1e3e62;">
+                    <strong style="color: #0b192c; display: block;">Hosur Hub</strong>
+                    <small style="color: #64748b;">Fast Logistics Dispatch</small>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; background: #f8fafc; padding: 20px; border-radius: 10px; border: 1px dashed #cbd5e1;">
+            <img src="/static/Images/overall.jpg" alt="JNS Tech Complete Catalog" style="max-width: 100%; height: auto; max-height: 320px; object-fit: contain; border-radius: 8px;" onerror="this.style.display='none';">
+        </div>
+    </div>
+</div>
+
+<!-- Products Showcase -->
+<div class="container">
+    <div class="section-head">
+        <span><i class="bi bi-gear-fill"></i> Garment Automation Products</span>
+        <h3>Precision Spares & Automation Solutions</h3>
+    </div>
+
+    <div class="grid">
+        {% for p in products %}
+        <div class="card">
+            <div>
+                <div class="card-img-wrap">
+                    <img src="{{ p.image_url }}" alt="{{ p.name }}" class="card-img" onerror="this.src='/static/Images/overall.jpg';">
+                    <span class="badge"><i class="bi bi-check2-circle"></i> {{ p.badge }}</span>
+                </div>
+                <div class="card-body">
+                    <span class="category-tag"><i class="bi bi-tag-fill"></i> {{ p.category }}</span>
+                    <h4>{{ p.name }}</h4>
+                    <p class="card-desc">{{ p.description }}</p>
+                </div>
+            </div>
+            <div class="card-footer">
+                <span class="price">{{ p.price }}</span>
+                <a href="#enquiry" class="btn-main" style="padding: 8px 16px; font-size: 0.85rem;"><i class="bi bi-envelope-paper-fill"></i> Enquire</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Enquiry Section -->
+<div class="enquiry-section" id="enquiry">
+    <h3 style="font-size: 1.8rem; font-weight: 800;"><i class="bi bi-chat-square-text-fill"></i> Request Machinery Spares or Service</h3>
+    <p style="color: #cbd5e1; margin-top: 6px;">Submit your requirement for immediate price quote and dispatch details from JNS Tech engineers.</p>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <p style="background: #22c55e; color: white; padding: 12px; margin-top: 15px; border-radius: 6px;"><i class="bi bi-check-circle-fill"></i> {{ message }}</p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form action="/enquiry" method="POST" class="enquiry-form">
+        <input type="text" name="name" placeholder="Factory / Company Name" required>
+        <input type="tel" name="phone" placeholder="Mobile / WhatsApp Number (+91)" required>
+        <div class="form-full">
+            <textarea name="message" rows="4" placeholder="Detail the spares required (e.g., Bristle blocks quantity, cutter blade part numbers, PCB models)..." required></textarea>
+        </div>
+        <div class="form-full">
+            <button type="submit" class="btn-main" style="width: 100%; justify-content: center; font-size: 1rem;"><i class="bi bi-send-fill"></i> Submit Spares / Service Request</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

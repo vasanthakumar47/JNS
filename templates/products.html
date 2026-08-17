@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}All Spare Parts & Machinery - JNS TECH{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="section-head">
+        <span><i class="bi bi-gear-fill"></i> Complete Inventory</span>
+        <h3>All Products & Spare Parts</h3>
+    </div>
+
+    <div class="grid">
+        {% for p in products %}
+        <div class="card">
+            <div>
+                <!-- Proper relative wrapper so the badge stays inside the card image -->
+                <div class="card-img-wrap">
+                    <img src="{{ p.image_url }}" alt="{{ p.name }}" class="card-img" onerror="this.src='https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=700&q=80';">
+                    <span class="badge"><i class="bi bi-check2-circle"></i> {{ p.badge }}</span>
+                </div>
+                <div class="card-body">
+                    <span class="category-tag"><i class="bi bi-tag-fill"></i> {{ p.category }}</span>
+                    <h4>{{ p.name }}</h4>
+                    <p class="card-desc">{{ p.description }}</p>
+                </div>
+            </div>
+            <div class="card-footer">
+                <span class="price">{{ p.price }}</span>
+                <a href="/#enquiry" class="btn-main" style="padding: 8px 16px; font-size: 0.85rem;"><i class="bi bi-envelope-paper-fill"></i> Enquire</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

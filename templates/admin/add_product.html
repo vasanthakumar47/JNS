@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Add New Spare Part - Admin{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 650px; margin: 30px auto;">
+    <div style="background: white; padding: 35px 30px; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 1px solid #e2e8f0;">
+        <h2 style="margin-bottom: 20px; color: var(--navy-dark); font-weight: 800;">
+            <i class="bi bi-plus-circle-fill text-warning"></i> Add New Spare Part
+        </h2>
+        
+        <form action="/admin/add" method="POST">
+            <div style="margin-bottom: 15px;">
+                <label style="display:block; font-weight:700; margin-bottom:6px; color:#1e293b;">Spare Part Name</label>
+                <input type="text" name="name" placeholder="e.g. Garment Cutter Blade Unit" style="width:100%; padding:11px; border:1px solid #cbd5e1; border-radius:6px;" required>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label style="display:block; font-weight:700; margin-bottom:6px; color:#1e293b;">Category</label>
+                <input type="text" name="category" placeholder="e.g. Cutter Spares / Spreader Spares" style="width:100%; padding:11px; border:1px solid #cbd5e1; border-radius:6px;" required>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label style="display:block; font-weight:700; margin-bottom:6px; color:#1e293b;">Price</label>
+                <input type="text" name="price" placeholder="e.g. ₹4,500" style="width:100%; padding:11px; border:1px solid #cbd5e1; border-radius:6px;" required>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label style="display:block; font-weight:700; margin-bottom:6px; color:#1e293b;">Badge Status</label>
+                <select name="badge" style="width:100%; padding:11px; border:1px solid #cbd5e1; border-radius:6px;">
+                    <option value="In Stock">In Stock</option>
+                    <option value="Best Seller">Best Seller</option>
+                    <option value="OEM Grade">OEM Grade</option>
+                    <option value="High Precision">High Precision</option>
+                    <option value="High Durability">High Durability</option>
+                </select>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label style="display:block; font-weight:700; margin-bottom:6px; color:#1e293b;">Image Path / Link</label>
+                <input type="text" name="image_url" placeholder="/static/Images/filename.jpg" style="width:100%; padding:11px; border:1px solid #cbd5e1; border-radius:6px;">
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <label style="display:block; font-weight:700; margin-bottom:6px; color:#1e293b;">Description</label>
+                <textarea name="description" rows="3" placeholder="Technical specifications..." style="width:100%; padding:11px; border:1px solid #cbd5e1; border-radius:6px;" required></textarea>
+            </div>
+
+            <button type="submit" class="btn-main" style="width: 100%; justify-content: center; font-size: 1rem;">
+                <i class="bi bi-save-fill"></i> Save & Publish Spare Part
+            </button>
+            <a href="/admin" style="display: block; text-align: center; margin-top: 15px; color: #64748b; text-decoration: none;">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
