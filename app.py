@@ -1,9 +1,10 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from functools import wraps
 
-app = Flask(__name__)
+# Setup Flask with explicit static path
+app = Flask(__name__, static_folder='static', static_url_path='/static')
 app.secret_key = "jnstech_secure_super_secret_key_2026"
 
 # Vercel serverless environment check & writable DB path fix
@@ -16,6 +17,12 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 ADMIN_PASSWORD = "vasanth@123"
+
+# Explicit Static File Handler for Vercel
+@app.route('/static/<path:filename>')
+def serve_static(filename):
+    root_dir = os.path.dirname(os.path.abspath(__file__))
+    return send_from_directory(os.path.join(root_dir, 'static'), filename)
 
 # Product Model
 class Product(db.Model):
@@ -94,7 +101,8 @@ def admin_login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-# Public Routes
+# ==================== PUBLIC ROUTES ====================
+
 @app.route("/")
 def home():
     init_db()
@@ -114,7 +122,8 @@ def send_enquiry():
     flash(f"Thank you {name}! Your enquiry has been received. JNS Tech will contact you at {phone}.", "success")
     return redirect(url_for("home") + "#enquiry")
 
-# Secured Admin Routes
+# ==================== SECURED ADMIN ROUTES ====================
+
 @app.route("/admin/login", methods=["GET", "POST"])
 def admin_login():
     if session.get("admin_logged_in"):
