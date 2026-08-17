@@ -189,7 +189,7 @@ def admin_delete_product(id):
     db.session.commit()
     return redirect(url_for("admin_dashboard"))
 
-# Vercel entry handler
+# Vercel entry handler#
 app = app
 
 if __name__ == "__main__":
