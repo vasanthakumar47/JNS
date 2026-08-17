@@ -3,118 +3,138 @@
 {% block title %}Admin Dashboard - JNS TECH{% endblock %}
 
 {% block content %}
-<div class="container" style="max-width: 1350px; margin: 0 auto; padding: 40px 4%;">
+<div class="container" style="max-width: 1350px; margin: 0 auto; padding: 25px 4%;">
 
     <!-- Dashboard Top Bar -->
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px;">
         <div>
-            <h2 style="color: #0b192c; font-weight: 800; display: flex; align-items: center; gap: 10px;">
+            <h2 style="color: #0b192c; font-weight: 800; font-size: clamp(1.3rem, 3.5vw, 1.8rem); display: flex; align-items: center; gap: 10px;">
                 <i class="bi bi-gear-wide-connected text-warning"></i> Inventory Control Panel
             </h2>
-            <p style="color: #64748b; font-size: 0.9rem; margin-top: 2px;">Real-time management for garment machinery spare parts catalog</p>
+            <p style="color: #64748b; font-size: 0.85rem; margin-top: 2px;">Manage garment machinery spare parts catalog</p>
         </div>
-        <div style="display: flex; gap: 12px;">
-            <a href="/admin/add" class="btn-main" style="box-shadow: 0 4px 12px rgba(255, 101, 0, 0.25);">
-                <i class="bi bi-plus-lg"></i> Add New Spare Part
+        <div style="display: flex; gap: 10px; width: 100%; max-width: 400px;">
+            <a href="/admin/add" class="btn-main" style="flex: 1; justify-content: center; padding: 10px 14px; font-size: 0.85rem;">
+                <i class="bi bi-plus-lg"></i> Add Part
             </a>
-            <a href="/admin/logout" style="background: #fee2e2; color: #dc2626; padding: 10px 18px; border-radius: 6px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; border: 1px solid #fecaca; transition: 0.2s;">
+            <a href="/admin/logout" style="background: #fee2e2; color: #dc2626; padding: 10px 16px; border-radius: 6px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid #fecaca; font-size: 0.85rem;">
                 <i class="bi bi-box-arrow-right"></i> Logout
             </a>
         </div>
     </div>
 
     <!-- Quick Stat Cards -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 30px;">
-        <div style="background: #ffffff; padding: 18px 22px; border-radius: 8px; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 25px;">
+        <div style="background: #ffffff; padding: 14px 18px; border-radius: 8px; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between;">
             <div>
-                <span style="color: #64748b; font-size: 0.82rem; font-weight: 700; text-transform: uppercase;">Total Listed Items</span>
-                <h3 style="color: #0b192c; font-size: 1.6rem; font-weight: 800; margin-top: 4px;">{{ products|length }}</h3>
+                <span style="color: #64748b; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Total Items</span>
+                <h3 style="color: #0b192c; font-size: 1.4rem; font-weight: 800; margin-top: 2px;">{{ products|length }}</h3>
             </div>
-            <div style="background: #eff6ff; color: #2563eb; width: 45px; height: 45px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+            <div style="background: #eff6ff; color: #2563eb; width: 38px; height: 38px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">
                 <i class="bi bi-box-seam-fill"></i>
             </div>
         </div>
 
-        <div style="background: #ffffff; padding: 18px 22px; border-radius: 8px; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+        <div style="background: #ffffff; padding: 14px 18px; border-radius: 8px; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between;">
             <div>
-                <span style="color: #64748b; font-size: 0.82rem; font-weight: 700; text-transform: uppercase;">System Security</span>
-                <h3 style="color: #16a34a; font-size: 1.2rem; font-weight: 800; margin-top: 6px;">Protected</h3>
+                <span style="color: #64748b; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Status</span>
+                <h3 style="color: #16a34a; font-size: 1.1rem; font-weight: 800; margin-top: 4px;">Protected</h3>
             </div>
-            <div style="background: #f0fdf4; color: #16a34a; width: 45px; height: 45px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+            <div style="background: #f0fdf4; color: #16a34a; width: 38px; height: 38px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">
                 <i class="bi bi-shield-check"></i>
             </div>
         </div>
-
-        <div style="background: #ffffff; padding: 18px 22px; border-radius: 8px; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
-            <div>
-                <span style="color: #64748b; font-size: 0.82rem; font-weight: 700; text-transform: uppercase;">Database Target</span>
-                <h3 style="color: #0b192c; font-size: 1.2rem; font-weight: 800; margin-top: 6px;">SQLite (Local)</h3>
-            </div>
-            <div style="background: #fff7ed; color: #ff6500; width: 45px; height: 45px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
-                <i class="bi bi-database-fill-check"></i>
-            </div>
-        </div>
     </div>
 
-    <!-- Main Data Table Container -->
-    <div style="background: #ffffff; border-radius: 10px; border: 1px solid #e2e8f0; box-shadow: 0 4px 20px rgba(0,0,0,0.04); overflow: hidden;">
-        <div style="overflow-x: auto;">
-            <table style="width: 100%; border-collapse: collapse; text-align: left; min-width: 900px;">
-                <thead>
-                    <tr style="background-color: #0b192c; color: #ffffff;">
-                        <th style="padding: 16px 20px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; width: 60px;">ID</th>
-                        <th style="padding: 16px 20px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; width: 90px;">Preview</th>
-                        <th style="padding: 16px 20px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px;">Product / Spare Part</th>
-                        <th style="padding: 16px 20px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px;">Category</th>
-                        <th style="padding: 16px 20px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px;">Price</th>
-                        <th style="padding: 16px 20px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px;">Status Badge</th>
-                        <th style="padding: 16px 20px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; text-align: center; width: 170px;">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for p in products %}
-                    <tr style="border-bottom: 1px solid #f1f5f9; transition: background 0.2s;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='transparent'">
-                        <td style="padding: 16px 20px; font-weight: 700; color: #94a3b8; font-size: 0.9rem;">#{{ p.id }}</td>
-                        <td style="padding: 16px 20px;">
-                            <img src="{{ p.image_url }}" alt="{{ p.name }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 6px; border: 1px solid #cbd5e1; display: block;" onerror="this.src='https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=700&q=80';">
-                        </td>
-                        <td style="padding: 16px 20px;">
-                            <div style="font-weight: 700; color: #0b192c; font-size: 0.95rem; margin-bottom: 2px;">{{ p.name }}</div>
-                            <div style="font-size: 0.8rem; color: #64748b; max-width: 320px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ p.description }}</div>
-                        </td>
-                        <td style="padding: 16px 20px;">
-                            <span style="background: #f1f5f9; color: #1e3e62; font-weight: 700; font-size: 0.8rem; padding: 4px 10px; border-radius: 4px; display: inline-block;">
-                                <i class="bi bi-tag-fill" style="color: #ff6500; font-size: 0.75rem;"></i> {{ p.category }}
-                            </span>
-                        </td>
-                        <td style="padding: 16px 20px; font-weight: 800; color: #ff6500; font-size: 1rem;">{{ p.price }}</td>
-                        <td style="padding: 16px 20px;">
-                            <span style="background: #0b192c; color: #ff9852; font-size: 0.72rem; font-weight: 700; padding: 4px 10px; border-radius: 20px; border: 1px solid rgba(255,101,0,0.4); display: inline-block; white-space: nowrap;">
-                                {{ p.badge }}
-                            </span>
-                        </td>
-                        <td style="padding: 16px 20px; text-align: center;">
-                            <div style="display: inline-flex; gap: 8px;">
-                                <a href="/admin/edit/{{ p.id }}" style="background: #0284c7; color: white; padding: 6px 12px; border-radius: 6px; text-decoration: none; font-size: 0.82rem; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">
-                                    <i class="bi bi-pencil-square"></i> Edit
-                                </a>
-                                <a href="/admin/delete/{{ p.id }}" style="background: #ef4444; color: white; padding: 6px 12px; border-radius: 6px; text-decoration: none; font-size: 0.82rem; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;" onclick="return confirm('Are you sure you want to delete {{ p.name }}?');">
-                                    <i class="bi bi-trash-fill"></i> Delete
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                    {% else %}
-                    <tr>
-                        <td colspan="7" style="padding: 40px; text-align: center; color: #64748b;">
-                            <i class="bi bi-inbox" style="font-size: 2.5rem; display: block; margin-bottom: 10px;"></i>
-                            No products found in the database. Click "+ Add New Spare Part" to start.
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+    <!-- Desktop Table View -->
+    <div class="admin-desktop-table" style="background: #ffffff; border-radius: 10px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.03);">
+        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+            <thead>
+                <tr style="background-color: #0b192c; color: #ffffff;">
+                    <th style="padding: 14px 16px; font-size: 0.82rem; text-transform: uppercase; width: 60px;">ID</th>
+                    <th style="padding: 14px 16px; font-size: 0.82rem; text-transform: uppercase; width: 80px;">Image</th>
+                    <th style="padding: 14px 16px; font-size: 0.82rem; text-transform: uppercase;">Product Name</th>
+                    <th style="padding: 14px 16px; font-size: 0.82rem; text-transform: uppercase;">Category</th>
+                    <th style="padding: 14px 16px; font-size: 0.82rem; text-transform: uppercase;">Price</th>
+                    <th style="padding: 14px 16px; font-size: 0.82rem; text-transform: uppercase;">Badge</th>
+                    <th style="padding: 14px 16px; font-size: 0.82rem; text-transform: uppercase; text-align: center; width: 170px;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in products %}
+                <tr style="border-bottom: 1px solid #f1f5f9;">
+                    <td style="padding: 14px 16px; font-weight: 700; color: #94a3b8; font-size: 0.88rem;">#{{ p.id }}</td>
+                    <td style="padding: 14px 16px;">
+                        <img src="{{ p.image_url }}" alt="{{ p.name }}" style="width: 48px; height: 48px; object-fit: contain; border-radius: 6px; border: 1px solid #e2e8f0; background: #fff; padding: 2px;" onerror="this.src='/static/Images/overall.jpg';">
+                    </td>
+                    <td style="padding: 14px 16px;">
+                        <strong style="color: #0b192c; font-size: 0.92rem; display: block;">{{ p.name }}</strong>
+                        <small style="color: #64748b;">{{ p.description[:60] }}...</small>
+                    </td>
+                    <td style="padding: 14px 16px;">
+                        <span style="background: #f1f5f9; color: #1e3e62; font-weight: 700; font-size: 0.78rem; padding: 4px 8px; border-radius: 4px;">{{ p.category }}</span>
+                    </td>
+                    <td style="padding: 14px 16px; font-weight: 800; color: #ff6500; font-size: 0.95rem;">{{ p.price }}</td>
+                    <td style="padding: 14px 16px;">
+                        <span style="background: #0b192c; color: #ff9852; font-size: 0.72rem; font-weight: 700; padding: 3px 8px; border-radius: 12px; border: 1px solid rgba(255,101,0,0.4); white-space: nowrap;">{{ p.badge }}</span>
+                    </td>
+                    <td style="padding: 14px 16px; text-align: center;">
+                        <div style="display: inline-flex; gap: 6px;">
+                            <a href="/admin/edit/{{ p.id }}" style="background: #0284c7; color: white; padding: 6px 10px; border-radius: 4px; text-decoration: none; font-size: 0.8rem; font-weight: 700;">
+                                <i class="bi bi-pencil"></i> Edit
+                            </a>
+                            <a href="/admin/delete/{{ p.id }}" style="background: #ef4444; color: white; padding: 6px 10px; border-radius: 4px; text-decoration: none; font-size: 0.8rem; font-weight: 700;" onclick="return confirm('Delete {{ p.name }}?');">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
+
+    <!-- Mobile Responsive Cards View -->
+    <div class="admin-mobile-cards" style="display: none; flex-direction: column; gap: 14px;">
+        {% for p in products %}
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+            <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 10px;">
+                <img src="{{ p.image_url }}" alt="{{ p.name }}" style="width: 60px; height: 60px; object-fit: contain; border-radius: 6px; border: 1px solid #e2e8f0; background: #fff; padding: 4px;" onerror="this.src='/static/Images/overall.jpg';">
+                <div style="flex: 1;">
+                    <span style="color: #94a3b8; font-size: 0.75rem; font-weight: 700;">#{{ p.id }}</span>
+                    <h4 style="color: #0b192c; font-size: 0.95rem; font-weight: 800; line-height: 1.2;">{{ p.name }}</h4>
+                    <span style="color: #ff6500; font-weight: 800; font-size: 0.95rem; display: block; margin-top: 2px;">{{ p.price }}</span>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; align-items: center;">
+                <span style="background: #f1f5f9; color: #1e3e62; font-weight: 700; font-size: 0.72rem; padding: 3px 8px; border-radius: 4px;">{{ p.category }}</span>
+                <span style="background: #0b192c; color: #ff9852; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 12px; border: 1px solid rgba(255,101,0,0.4);">{{ p.badge }}</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                <a href="/admin/edit/{{ p.id }}" style="background: #0284c7; color: white; padding: 9px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-weight: 700; text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                    <i class="bi bi-pencil-square"></i> Edit
+                </a>
+                <a href="/admin/delete/{{ p.id }}" style="background: #fee2e2; color: #dc2626; border: 1px solid #fecaca; padding: 9px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-weight: 700; text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px;" onclick="return confirm('Delete {{ p.name }}?');">
+                    <i class="bi bi-trash-fill"></i> Delete
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
 </div>
+
+<!-- Auto Switch Style for Mobile Screen -->
+<style>
+@media screen and (max-width: 800px) {
+    .admin-desktop-table {
+        display: none !important;
+    }
+    .admin-mobile-cards {
+        display: flex !important;
+    }
+}
+</style>
 {% endblock %}
