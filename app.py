@@ -1,15 +1,32 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+import os
+from flask import Flask, render_template, request, redirect, url_for, flash, session, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from functools import wraps
 
-app = Flask(__name__)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+app = Flask(
+    __name__,
+    static_folder=os.path.join(BASE_DIR, 'static'),
+    static_url_path='/static'
+)
 app.secret_key = "jnstech_secure_super_secret_key_2026"
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///jnstech_local.db'
+# Vercel serverless writable DB path fix
+if os.environ.get("VERCEL"):
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/jnstech_local.db'
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///jnstech_local.db'
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 ADMIN_PASSWORD = "vasanth@123"
+
+# Explicit Static File Handler for Vercel
+@app.route('/static/<path:filename>')
+def serve_static(filename):
+    return send_from_directory(os.path.join(BASE_DIR, 'static'), filename)
 
 # Product Model
 class Product(db.Model):
@@ -21,62 +38,63 @@ class Product(db.Model):
     image_url = db.Column(db.String(500), nullable=True)
     description = db.Column(db.Text, nullable=False)
 
-# Auto Load Real Local Images from static/Images/
-with app.app_context():
-    db.create_all()
-    if Product.query.count() == 0:
-        jns_catalog = [
-            Product(
-                name="Maintenance Kit for All Cutters",
-                category="Cutter Spares",
-                price="₹18,500",
-                badge="High Precision",
-                image_url="/static/Images/Maintenance kit for All Cutters.jpg",
-                description="Complete industrial overhaul and periodic service kit tailored for CNC multi-ply apparel cutting machines."
-            ),
-            Product(
-                name="Modular Cutting Table Bristle Blocks",
-                category="Bristle Surface",
-                price="₹1,450 / pc",
-                badge="High Durability",
-                image_url="/static/Images/Bristle block.jpg",
-                description="High-density virgin polymer bristle blocks designed for low vacuum loss and extended knife blade life."
-            ),
-            Product(
-                name="Blade Grinding Stones & Sharpening Belts",
-                category="Sharpening Systems",
-                price="₹2,800",
-                badge="In Stock",
-                image_url="/static/Images/Grinding stone and belt.jpg",
-                description="Precision-grit diamond sharpening wheels and abrasive belts for consistent, burr-free cutter blade edges."
-            ),
-            Product(
-                name="High-Speed Garment Cutting Blades",
-                category="Industrial Knives",
-                price="₹4,200",
-                badge="Tungsten Carbide",
-                image_url="/static/Images/Blades.jpg",
-                description="Hardened HSS & tungsten carbide reciprocating blades engineered for thick denim, knitwear, and woven plies."
-            ),
-            Product(
-                name="Spreader Electronic Control PCB & Sensor Unit",
-                category="Spreader Electronics",
-                price="₹16,000",
-                badge="OEM Certified",
-                image_url="/static/Images/All Spreader parts and PCB.jpg",
-                description="Mainboard servo drive controllers, optical edge sensors, and wiring harness sets for automatic spreading machines."
-            ),
-            Product(
-                name="Heavy-Duty Garment Factory Workstations & Tables",
-                category="Factory Infrastructure",
-                price="₹32,000",
-                badge="Custom Built",
-                image_url="/static/Images/Factory Furniture.jpg",
-                description="Modular combined cutting tables with air flotation blowers, pinning tables, and ergonomic operator chairs."
-            )
-        ]
-        db.session.bulk_save_objects(jns_catalog)
-        db.session.commit()
+# Safe Database Initializer
+def init_db():
+    with app.app_context():
+        db.create_all()
+        if Product.query.count() == 0:
+            jns_catalog = [
+                Product(
+                    name="Maintenance Kit for All Cutters",
+                    category="Cutter Spares",
+                    price="₹18,500",
+                    badge="High Precision",
+                    image_url="/static/Images/Maintenance kit for All Cutters.jpg",
+                    description="Complete industrial overhaul and periodic service kit tailored for CNC multi-ply apparel cutting machines."[cite: 1]
+                ),
+                Product(
+                    name="Modular Cutting Table Bristle Blocks",
+                    category="Bristle Surface",
+                    price="₹1,450 / pc",
+                    badge="High Durability",
+                    image_url="/static/Images/Bristle block.jpg",
+                    description="High-density virgin polymer bristle blocks designed for low vacuum loss and extended knife blade life."[cite: 1]
+                ),
+                Product(
+                    name="Blade Grinding Stones & Sharpening Belts",
+                    category="Sharpening Systems",
+                    price="₹2,800",
+                    badge="In Stock",
+                    image_url="/static/Images/Grinding stone and belt.jpg",
+                    description="Precision-grit diamond sharpening wheels and abrasive belts for consistent, burr-free cutter blade edges."[cite: 1]
+                ),
+                Product(
+                    name="High-Speed Garment Cutting Blades",
+                    category="Industrial Knives",
+                    price="₹4,200",
+                    badge="Tungsten Carbide",
+                    image_url="/static/Images/Blades.jpg",
+                    description="Hardened HSS & tungsten carbide reciprocating blades engineered for thick denim, knitwear, and woven plies."[cite: 1]
+                ),
+                Product(
+                    name="Spreader Electronic Control PCB & Sensor Unit",
+                    category="Spreader Electronics",
+                    price="₹16,000",
+                    badge="OEM Certified",
+                    image_url="/static/Images/All Spreader parts and PCB.jpg",
+                    description="Mainboard servo drive controllers, optical edge sensors, and wiring harness sets for automatic spreading machines."[cite: 1]
+                ),
+                Product(
+                    name="Heavy-Duty Garment Factory Workstations & Tables",
+                    category="Factory Infrastructure",
+                    price="₹32,000",
+                    badge="Custom Built",
+                    image_url="/static/Images/Factory Furniture.jpg",
+                    description="Modular combined cutting tables with air flotation blowers, pinning tables, and ergonomic operator chairs."[cite: 1]
+                )
+            ]
+            db.session.bulk_save_objects(jns_catalog)
+            db.session.commit()
 
 # Admin Auth Guard
 def admin_login_required(f):
@@ -90,11 +108,13 @@ def admin_login_required(f):
 # Public Routes
 @app.route("/")
 def home():
+    init_db()
     products = Product.query.order_by(Product.id.asc()).all()
     return render_template("index.html", products=products)
 
 @app.route("/products")
 def products():
+    init_db()
     all_products = Product.query.order_by(Product.id.asc()).all()
     return render_template("products.html", products=all_products)
 
@@ -102,7 +122,7 @@ def products():
 def send_enquiry():
     name = request.form.get("name")
     phone = request.form.get("phone")
-    flash(f"Thank you {name}! Your enquiry has been received. JNS Tech will contact you at {phone}.", "success")
+    flash(f"Thank you {name}! Your enquiry has been received. JNS Tech will contact you at {phone}.", "success")[cite: 1]
     return redirect(url_for("home") + "#enquiry")
 
 # Secured Admin Routes
@@ -126,6 +146,7 @@ def admin_logout():
 @app.route("/admin")
 @admin_login_required
 def admin_dashboard():
+    init_db()
     all_products = Product.query.order_by(Product.id.desc()).all()
     return render_template("admin/dashboard.html", products=all_products)
 
@@ -171,4 +192,5 @@ def admin_delete_product(id):
     return redirect(url_for("admin_dashboard"))
 
 if __name__ == "__main__":
+    init_db()
     app.run(debug=True)
