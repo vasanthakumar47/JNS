@@ -12,22 +12,23 @@ app = Flask(
 )
 app.secret_key = "jnstech_secure_super_secret_key_2026"
 
-# Vercel serverless writable DB path
+# Vercel serverless writable DB path fix
 if os.environ.get("VERCEL"):
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/jnstech_prod_v2.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/jnstech_v3.db'
 else:
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///jnstech_prod_v2.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///jnstech_v3.db'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 ADMIN_PASSWORD = "vasanth@123"
 
+# Explicit Static File Handler for Vercel
 @app.route('/static/<path:filename>')
 def serve_static(filename):
     return send_from_directory(os.path.join(BASE_DIR, 'static'), filename)
 
-# Product Database Model
+# Product Model
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(150), nullable=False)
@@ -37,6 +38,7 @@ class Product(db.Model):
     image_url = db.Column(db.String(500), nullable=True)
     description = db.Column(db.Text, nullable=False)
 
+# Safe Database Initializer with updated clean image filenames
 def init_db():
     with app.app_context():
         db.create_all()
@@ -47,7 +49,7 @@ def init_db():
                     category="Cutter Spares",
                     price="₹18,500",
                     badge="High Precision",
-                    image_url="/static/Images/Maintenance%20kit%20for%20All%20Cutters.jpg",
+                    image_url="/static/Images/MaintenancekitforAllCutters.jpg",
                     description="Complete industrial overhaul and periodic service kit tailored for CNC multi-ply apparel cutting machines."
                 ),
                 Product(
@@ -55,7 +57,7 @@ def init_db():
                     category="Bristle Surface",
                     price="₹1,450 / pc",
                     badge="High Durability",
-                    image_url="/static/Images/Bristle%20block.jpg",
+                    image_url="/static/Images/Bristleblock.jpg",
                     description="High-density virgin polymer bristle blocks designed for low vacuum loss and extended knife blade life."
                 ),
                 Product(
@@ -63,7 +65,7 @@ def init_db():
                     category="Sharpening Systems",
                     price="₹2,800",
                     badge="In Stock",
-                    image_url="/static/Images/Grinding%20stone%20and%20belt.jpg",
+                    image_url="/static/Images/Grindingstoneandbelt.jpg",
                     description="Precision-grit diamond sharpening wheels and abrasive belts for consistent, burr-free cutter blade edges."
                 ),
                 Product(
@@ -79,7 +81,7 @@ def init_db():
                     category="Spreader Electronics",
                     price="₹16,000",
                     badge="OEM Certified",
-                    image_url="/static/Images/All%20Spreader%20parts%20and%20PCB.jpg",
+                    image_url="/static/Images/AllSpreaderpartsandPCB.jpg",
                     description="Mainboard servo drive controllers, optical edge sensors, and wiring harness sets for automatic spreading machines."
                 ),
                 Product(
@@ -87,13 +89,14 @@ def init_db():
                     category="Factory Infrastructure",
                     price="₹32,000",
                     badge="Custom Built",
-                    image_url="/static/Images/Factory%20Furniture.jpg",
+                    image_url="/static/Images/FactoryFurniture.jpg",
                     description="Modular combined cutting tables with air flotation blowers, pinning tables, and ergonomic operator chairs."
                 )
             ]
             db.session.bulk_save_objects(jns_catalog)
             db.session.commit()
 
+# Admin Auth Guard
 def admin_login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -122,7 +125,7 @@ def send_enquiry():
     flash(f"Thank you {name}! Your enquiry has been received. JNS Tech will contact you at {phone}.", "success")
     return redirect(url_for("home") + "#enquiry")
 
-# Admin Routes
+# Secured Admin Routes
 @app.route("/admin/login", methods=["GET", "POST"])
 def admin_login():
     if session.get("admin_logged_in"):
