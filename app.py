@@ -118,12 +118,29 @@ def products():
     all_products = Product.query.order_by(Product.id.asc()).all()
     return render_template("products.html", products=all_products)
 
+import urllib.parse
+
 @app.route("/enquiry", methods=["POST"])
 def send_enquiry():
-    name = request.form.get("name")
-    phone = request.form.get("phone")
-    flash(f"Thank you {name}! Your enquiry has been received. JNS Tech will contact you at {phone}.", "success")
-    return redirect(url_for("home") + "#enquiry")
+    name = request.form.get("name", "").strip()
+    phone = request.form.get("phone", "").strip()
+    message = request.form.get("message", "").strip()
+
+    target_whatsapp = "917200551525"
+    
+    # Formatted WhatsApp Text
+    text_content = (
+        f"🚨 *New Enquiry - JNS TECH*\n\n"
+        f"👤 *Factory / Client:* {name}\n"
+        f"📞 *Mobile:* {phone}\n"
+        f"📝 *Requirement:* {message}\n\n"
+        f"— Sent via jnstech website"
+    )
+    
+    encoded_text = urllib.parse.quote(text_content)
+    whatsapp_url = f"https://api.whatsapp.com/send?phone={target_whatsapp}&text={encoded_text}"
+    
+    return redirect(whatsapp_url)
 
 # Secured Admin Routes
 @app.route("/admin/login", methods=["GET", "POST"])
