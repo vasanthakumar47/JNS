@@ -50,7 +50,7 @@ def init_db():
                     price="₹18,500",
                     badge="High Precision",
                     image_url="/static/Images/Maintenance kit for All Cutters.jpg",
-                    description="Complete industrial overhaul and periodic service kit tailored for CNC multi-ply apparel cutting machines."[cite: 1]
+                    description="Complete industrial overhaul and periodic service kit tailored for CNC multi-ply apparel cutting machines."
                 ),
                 Product(
                     name="Modular Cutting Table Bristle Blocks",
@@ -58,7 +58,7 @@ def init_db():
                     price="₹1,450 / pc",
                     badge="High Durability",
                     image_url="/static/Images/Bristle block.jpg",
-                    description="High-density virgin polymer bristle blocks designed for low vacuum loss and extended knife blade life."[cite: 1]
+                    description="High-density virgin polymer bristle blocks designed for low vacuum loss and extended knife blade life."
                 ),
                 Product(
                     name="Blade Grinding Stones & Sharpening Belts",
@@ -66,7 +66,7 @@ def init_db():
                     price="₹2,800",
                     badge="In Stock",
                     image_url="/static/Images/Grinding stone and belt.jpg",
-                    description="Precision-grit diamond sharpening wheels and abrasive belts for consistent, burr-free cutter blade edges."[cite: 1]
+                    description="Precision-grit diamond sharpening wheels and abrasive belts for consistent, burr-free cutter blade edges."
                 ),
                 Product(
                     name="High-Speed Garment Cutting Blades",
@@ -74,7 +74,7 @@ def init_db():
                     price="₹4,200",
                     badge="Tungsten Carbide",
                     image_url="/static/Images/Blades.jpg",
-                    description="Hardened HSS & tungsten carbide reciprocating blades engineered for thick denim, knitwear, and woven plies."[cite: 1]
+                    description="Hardened HSS & tungsten carbide reciprocating blades engineered for thick denim, knitwear, and woven plies."
                 ),
                 Product(
                     name="Spreader Electronic Control PCB & Sensor Unit",
@@ -82,7 +82,7 @@ def init_db():
                     price="₹16,000",
                     badge="OEM Certified",
                     image_url="/static/Images/All Spreader parts and PCB.jpg",
-                    description="Mainboard servo drive controllers, optical edge sensors, and wiring harness sets for automatic spreading machines."[cite: 1]
+                    description="Mainboard servo drive controllers, optical edge sensors, and wiring harness sets for automatic spreading machines."
                 ),
                 Product(
                     name="Heavy-Duty Garment Factory Workstations & Tables",
@@ -90,7 +90,7 @@ def init_db():
                     price="₹32,000",
                     badge="Custom Built",
                     image_url="/static/Images/Factory Furniture.jpg",
-                    description="Modular combined cutting tables with air flotation blowers, pinning tables, and ergonomic operator chairs."[cite: 1]
+                    description="Modular combined cutting tables with air flotation blowers, pinning tables, and ergonomic operator chairs."
                 )
             ]
             db.session.bulk_save_objects(jns_catalog)
@@ -122,7 +122,7 @@ def products():
 def send_enquiry():
     name = request.form.get("name")
     phone = request.form.get("phone")
-    flash(f"Thank you {name}! Your enquiry has been received. JNS Tech will contact you at {phone}.", "success")[cite: 1]
+    flash(f"Thank you {name}! Your enquiry has been received. JNS Tech will contact you at {phone}.", "success")
     return redirect(url_for("home") + "#enquiry")
 
 # Secured Admin Routes
